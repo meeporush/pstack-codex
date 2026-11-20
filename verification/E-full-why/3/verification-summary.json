@@ -1,0 +1,30 @@
+{
+  "completed_turn": true,
+  "selected_playbook": "investigation",
+  "poteto_mode_read": false,
+  "adapter_read": true,
+  "why_path_attempted": true,
+  "why_read": true,
+  "checklist_path": "native",
+  "first_source_event": 21,
+  "first_checklist_event": 9,
+  "checklist_before_source": true,
+  "expected_item_count": 4,
+  "initial_item_count": 4,
+  "original_step_wording": false,
+  "final_item_statuses": [
+    "completed",
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "all_items_completed": true,
+  "cites_source_lines": true,
+  "identifies_direct_caller": true,
+  "identifies_fee": false,
+  "fixture_unchanged": true,
+  "cli_exit_code": 0,
+  "answer_excerpt": "## Overview\n\n`render_receipt` adds a 175-cent fee when `item_count` is nonzero because its fee expression checks the truthiness of that count. The local record does not explain *why* that fee policy was chosen.\n\n## Key concepts\n\n`checkout` passes the number of prices as `item_count`, so an empty list produces zero and skips the fee.\n\n## How it works\n\nThe condition is `175 if item_count else 0` in [receipt.py](<fixture>/receipt.py:2). A read-only check returned `$0.00` for `checkout([])` and `$2.75` for `checkout([100])`.\n\n## Where things live\n\n[checkout.py](<fixture>/checkout.py:5) supplies the count and subtotal. The only local commit is the fixture baseline; it gives no rationale for the condition.\n\n## Gotchas\n\nThe function checks whether the count is nonzero, rather than whether it is positive. **Fix Root Causes** shaped the decision to trace the condition back through its caller before describing the behavior.\n\nthroughput checkpoint: n/a, read-only investigation",
+  "case": "E-full-why",
+  "run": 3
+}

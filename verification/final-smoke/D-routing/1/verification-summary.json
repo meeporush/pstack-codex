@@ -1,0 +1,30 @@
+{
+  "completed_turn": true,
+  "selected_playbook": "investigation",
+  "poteto_mode_read": false,
+  "adapter_read": true,
+  "why_path_attempted": false,
+  "why_read": false,
+  "checklist_path": "native",
+  "first_source_event": 12,
+  "first_checklist_event": 9,
+  "checklist_before_source": true,
+  "expected_item_count": 4,
+  "initial_item_count": 4,
+  "original_step_wording": true,
+  "final_item_statuses": [
+    "completed",
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "all_items_completed": true,
+  "cites_source_lines": true,
+  "identifies_direct_caller": false,
+  "identifies_fee": true,
+  "fixture_unchanged": true,
+  "cli_exit_code": 0,
+  "answer_excerpt": "## Overview\n\nThe receipt total is the sum of the input prices in cents, plus **175 cents when the cart has at least one item**.\n\n## Key concepts\n\n`checkout` uses the number of prices as the item count and their sum as the subtotal. [checkout.py](<fixture>/checkout.py:4)\n\n## How it works\n\n`render_receipt` adds the charge, converts cents to dollars with `divmod(total_cents, 100)`, and prints two decimal places. [receipt.py](<fixture>/receipt.py:1)\n\n## Where things live\n\nThe calculation spans [checkout.py](<fixture>/checkout.py:4) and [receipt.py](<fixture>/receipt.py:1).\n\n## Gotchas\n\nAn empty cart gets no charge. I verified that `checkout([])` returns `0 items: $0.00` and `checkout([250, 99])` returns `2 items: $5.24`.\n\n**Principles applied:** *Minimize Reader Load* led me to trace both functions and state one formula. *Prove It Works* led me to run those two cases against the code.",
+  "case": "D-routing",
+  "run": 1
+}

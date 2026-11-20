@@ -1,0 +1,30 @@
+{
+  "completed_turn": true,
+  "selected_playbook": "investigation",
+  "poteto_mode_read": false,
+  "adapter_read": true,
+  "why_path_attempted": false,
+  "why_read": false,
+  "checklist_path": "native",
+  "first_source_event": 15,
+  "first_checklist_event": 9,
+  "checklist_before_source": true,
+  "expected_item_count": 4,
+  "initial_item_count": 4,
+  "original_step_wording": false,
+  "final_item_statuses": [
+    "completed",
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "all_items_completed": true,
+  "cites_source_lines": true,
+  "identifies_direct_caller": false,
+  "identifies_fee": true,
+  "fixture_unchanged": true,
+  "cli_exit_code": 0,
+  "answer_excerpt": "## How checkout computes the receipt total\n\n[checkout.py](<fixture>/checkout.py:4) sums the item prices in cents and passes the subtotal and item count to [receipt.py](<fixture>/receipt.py:1). The receipt adds **175 cents** if there is at least one item, then formats the total as dollars and cents. An empty cart gets no fee.\n\nI checked the rendered result. Prices of 100 and 250 cents produce `2 items: $5.25`; an empty cart produces `0 items: $0.00`. The **Prove It Works** principle led me to run those examples against checkout itself.\n\nthroughput checkpoint: n/a, read-only investigation",
+  "case": "D-routing",
+  "run": 1
+}

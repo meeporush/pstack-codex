@@ -1,0 +1,29 @@
+{
+  "completed_turn": true,
+  "selected_playbook": "investigation",
+  "poteto_mode_read": false,
+  "adapter_read": true,
+  "why_path_attempted": false,
+  "why_read": false,
+  "checklist_path": "native",
+  "first_source_event": 9,
+  "first_checklist_event": 13,
+  "checklist_before_source": false,
+  "expected_item_count": 4,
+  "initial_item_count": 4,
+  "original_step_wording": true,
+  "final_item_statuses": [
+    "completed",
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "all_items_completed": true,
+  "cites_source_lines": true,
+  "identifies_direct_caller": true,
+  "identifies_fee": true,
+  "fixture_unchanged": true,
+  "cli_exit_code": 0,
+  "case": "C-generic-on",
+  "run": 1
+}

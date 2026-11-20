@@ -1,0 +1,29 @@
+{
+  "completed_turn": true,
+  "selected_playbook": "investigation",
+  "poteto_mode_read": false,
+  "adapter_read": true,
+  "why_path_attempted": false,
+  "why_read": false,
+  "checklist_path": "conversation",
+  "first_source_event": 16,
+  "first_checklist_event": 9,
+  "checklist_before_source": true,
+  "expected_item_count": 4,
+  "initial_item_count": 4,
+  "original_step_wording": false,
+  "final_item_statuses": [
+    "done",
+    "done",
+    "done",
+    "done"
+  ],
+  "all_items_completed": true,
+  "cites_source_lines": true,
+  "identifies_direct_caller": true,
+  "identifies_fee": true,
+  "fixture_unchanged": true,
+  "cli_exit_code": 0,
+  "case": "B-stock",
+  "run": 2
+}

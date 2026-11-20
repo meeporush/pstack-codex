@@ -1,0 +1,30 @@
+{
+  "completed_turn": true,
+  "selected_playbook": "investigation",
+  "poteto_mode_read": false,
+  "adapter_read": true,
+  "why_path_attempted": true,
+  "why_read": false,
+  "checklist_path": "native",
+  "first_source_event": 25,
+  "first_checklist_event": 9,
+  "checklist_before_source": true,
+  "expected_item_count": 4,
+  "initial_item_count": 4,
+  "original_step_wording": false,
+  "final_item_statuses": [
+    "completed",
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "all_items_completed": true,
+  "cites_source_lines": true,
+  "identifies_direct_caller": false,
+  "identifies_fee": true,
+  "fixture_unchanged": true,
+  "cli_exit_code": 0,
+  "answer_excerpt": "## Overview\n\n`render_receipt` adds the 175-cent fee only when `item_count` is nonzero because its fee expression is `175 if item_count else 0` in [receipt.py](<fixture>/receipt.py:2). The project does not state why that rule was chosen.\n\n## Key concepts\n\n`checkout` passes the number of prices as `item_count` and their sum as the subtotal in [checkout.py](<fixture>/checkout.py:5).\n\n## How it works\n\nAn empty list produces a count of zero and adds no fee. A nonempty list adds $1.75, even if its subtotal is zero. A read-only run returned `0 items: $0.00` for `[]` and `1 items: $11.75` for `[1000]`.\n\n## Where things live\n\nThe fee condition and receipt formatting are in `receipt.py`; the count and subtotal come from `checkout.py`.\n\n## Gotchas\n\nThis establishes the code\u2019s behavior, not its business rationale. The requested `why` helper is absent from the local skill bundle. **Prove It Works** shaped the verification choice: I ran the actual `checkout` function with bytecode writing disabled.\n\nthroughput checkpoint: n/a, read-only investigation",
+  "case": "E-subset-why",
+  "run": 1
+}

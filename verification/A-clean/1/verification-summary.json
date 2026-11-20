@@ -1,0 +1,32 @@
+{
+  "completed_turn": true,
+  "selected_playbook": null,
+  "poteto_mode_read": false,
+  "adapter_read": false,
+  "why_path_attempted": false,
+  "why_read": false,
+  "checklist_path": "none",
+  "first_source_event": null,
+  "first_checklist_event": null,
+  "checklist_before_source": false,
+  "expected_item_count": 4,
+  "initial_item_count": 0,
+  "original_step_wording": false,
+  "final_item_statuses": [],
+  "all_items_completed": false,
+  "cites_source_lines": false,
+  "identifies_direct_caller": false,
+  "identifies_fee": false,
+  "fixture_unchanged": true,
+  "copied_user_files": [
+    "auth.json"
+  ],
+  "project_instruction_present": true,
+  "original_user_instruction_present": false,
+  "original_user_skills_present": false,
+  "poteto_mode_in_implicit_skill_list": false,
+  "cli_exit_code": 0,
+  "answer_excerpt": "**Project instruction file**\n\n- `<fixture>/AGENTS.md`\n\n**Skill directories listed in the supplied session context**\n\n- `<isolated-home>/skills/.system/imagegen`\n- `<isolated-home>/skills/.system/openai-docs`\n- `<isolated-home>/skills/.system/plugin-creator`\n- `<isolated-home>/skills/.system/skill-creator`\n- `<isolated-home>/skills/.system/skill-installer`\n- `<fixture>/.agents/skills/setup-pstack`",
+  "case": "A-clean",
+  "run": 1
+}

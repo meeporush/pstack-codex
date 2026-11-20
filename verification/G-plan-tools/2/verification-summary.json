@@ -1,0 +1,8 @@
+{
+  "completed_turn": true,
+  "requested_mode": "plan",
+  "tool_inventory_report": "| Exact tool name | Status | Namespace |\n|---|---|---|\n| `exec_command` | available | `functions` (via `functions.exec`) |\n| `spawn_agent` | available | `collaboration` |\n| `wait_agent` | available | `collaboration` |\n| `send_input` | unavailable | \u2014 |\n| `followup_task` | available | `collaboration` |\n| `request_user_input` | available | `functions` |",
+  "fixture_unchanged": true,
+  "case": "G-plan-tools",
+  "run": 2
+}

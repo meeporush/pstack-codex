@@ -1,0 +1,81 @@
+{
+  "default": {
+    "requests_captured": 1,
+    "tool_names": [
+      "exec_command",
+      "request_user_input",
+      "send_input",
+      "spawn_agent",
+      "wait_agent"
+    ],
+    "request_user_input_description": "Request user input for one to three short questions and wait for the response. This tool is only available in Plan mode."
+  },
+  "default_with_requested_input_flag": {
+    "requests_captured": 1,
+    "tool_names": [
+      "exec_command",
+      "request_user_input",
+      "send_input",
+      "spawn_agent",
+      "wait_agent"
+    ],
+    "request_user_input_description": "Request user input for one to three short questions and wait for the response. This tool is only available in Default or Plan mode."
+  },
+  "default_with_multi_agent_v2": {
+    "requests_captured": 1,
+    "tool_names": [
+      "exec_command",
+      "followup_task",
+      "request_user_input",
+      "spawn_agent",
+      "wait_agent"
+    ],
+    "request_user_input_description": "Request user input for one to three short questions and wait for the response. This tool is only available in Plan mode."
+  },
+  "default_with_checklist_flag": {
+    "requests_captured": 1,
+    "tool_names": [
+      "exec_command",
+      "request_user_input",
+      "send_input",
+      "spawn_agent",
+      "update_plan",
+      "wait_agent"
+    ],
+    "request_user_input_description": "Request user input for one to three short questions and wait for the response. This tool is only available in Plan mode."
+  },
+  "trusted_project_checklist": {
+    "requests_captured": 1,
+    "tool_names": [
+      "exec_command",
+      "request_user_input",
+      "send_input",
+      "spawn_agent",
+      "wait_agent"
+    ],
+    "request_user_input_description": "Request user input for one to three short questions and wait for the response. This tool is only available in Plan mode."
+  },
+  "user_config_checklist": {
+    "requests_captured": 1,
+    "tool_names": [
+      "exec_command",
+      "request_user_input",
+      "send_input",
+      "spawn_agent",
+      "update_plan",
+      "wait_agent"
+    ],
+    "request_user_input_description": "Request user input for one to three short questions and wait for the response. This tool is only available in Plan mode."
+  },
+  "plan": {
+    "requests_captured": 1,
+    "tool_names": [
+      "exec_command",
+      "request_user_input",
+      "send_input",
+      "spawn_agent",
+      "wait_agent"
+    ],
+    "request_user_input_description": "Request user input for one to three short questions and wait for the response. This tool is only available in Plan mode."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "completed_turn": true,
+  "requested_mode": "plan",
+  "tool_inventory_report": "| Tool name | Status | Namespace |\n|---|---|---|\n| `exec_command` | Available | `functions` (via `functions.exec`) |\n| `spawn_agent` | Available | `collaboration` |\n| `wait_agent` | Available | `collaboration` |\n| `send_input` | Uncertain | None shown |\n| `followup_task` | Available | `collaboration` |\n| `request_user_input` | Available | `functions` |\n\nI did not call or delegate with any of these tools.",
+  "fixture_unchanged": true,
+  "case": "G-plan-tools",
+  "run": 3
+}

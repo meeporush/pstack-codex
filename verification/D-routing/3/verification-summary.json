@@ -1,0 +1,30 @@
+{
+  "completed_turn": true,
+  "selected_playbook": "investigation",
+  "poteto_mode_read": false,
+  "adapter_read": true,
+  "why_path_attempted": false,
+  "why_read": false,
+  "checklist_path": "native",
+  "first_source_event": 18,
+  "first_checklist_event": 13,
+  "checklist_before_source": true,
+  "expected_item_count": 4,
+  "initial_item_count": 4,
+  "original_step_wording": false,
+  "final_item_statuses": [
+    "completed",
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "all_items_completed": true,
+  "cites_source_lines": true,
+  "identifies_direct_caller": false,
+  "identifies_fee": true,
+  "fixture_unchanged": true,
+  "cli_exit_code": 0,
+  "answer_excerpt": "Checkout sums the item prices in cents and counts the items in [checkout.py](<fixture>/checkout.py:4). In [receipt.py](<fixture>/receipt.py:1), it adds a flat **$1.75** when there is at least one item, then formats the result as dollars and cents. An empty checkout totals **$0.00**.\n\nThe **Minimize Reader Load** principle shaped this answer: the calculation is stated directly from its two source files. Throughput checkpoint: n/a, read-only investigation.",
+  "case": "D-routing",
+  "run": 3
+}
