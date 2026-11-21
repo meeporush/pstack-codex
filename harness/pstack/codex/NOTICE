@@ -1,3 +1,3 @@
-This project adapts pstack by Lauren Tan, published under the MIT license in cursor/plugins. The source revision is recorded in UPSTREAM.json. The upstream snapshot, bundled material, and adapted harness generator are distributed with the original MIT license. The Codex adapter, checker, and review runner are local additions.
+This project adapts pstack by Lauren Tan, published under the MIT license in cursor/plugins. The source revision is recorded in UPSTREAM.json. The upstream snapshot, bundled material, and adapted harness generator are distributed with the original MIT license. The Codex-specific additions are copyright (c) 2026 Ronald Leung and are distributed under the MIT license.
 
 Michael Denyer’s port was consulted as a design reference. This project reuses no code or skill text from that port.
