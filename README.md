@@ -1,18 +1,28 @@
 # pstack for Codex
 
-A downstream port of Lauren Tan’s pstack for project-local Codex skills. The preview supports the **Investigation** playbook. The generated package includes every upstream skill and its bundled references so the shared entry point can resolve them. Other playbooks are available for inspection and still need compatibility testing.
+A community port of Lauren Tan’s pstack for Codex. The preview supports the **Investigation** playbook, which traces code and cites the relevant source lines.
 
-## Try the preview
+## Quickstart
 
-Generate the package with Node.js. From the port’s root, copy the generated directory to a disposable project that has an unused `.agents` path.
+With Git and a signed-in Codex CLI on macOS or Linux, paste this into your terminal. It copies the published skills and a two-file Python example into a temporary directory, then starts a read-only Codex run with the CLI’s default configuration.
 
 ```bash
-node scripts/generate-pstack-harness-trees.mjs
-destination=/absolute/path/to/test-project
-mkdir "$destination/.agents" && cp -R harness/pstack/codex/. "$destination/.agents/"
+(
+  set -e
+  pstack_trial="$(mktemp -d)"
+  git clone --depth 1 https://github.com/meeporush/pstack-codex.git "$pstack_trial/pstack-codex"
+  mkdir "$pstack_trial/demo"
+  cp -R "$pstack_trial/pstack-codex/harness/pstack/codex" "$pstack_trial/demo/.agents"
+  cp "$pstack_trial/pstack-codex/fixture/"*.py "$pstack_trial/demo/"
+  codex exec --ignore-user-config --cd "$pstack_trial/demo" \
+    --sandbox read-only --skip-git-repo-check --ephemeral \
+    '$poteto-mode Explain what render_receipt does and name its direct caller. Cite the source lines. Use only local files.'
+)
 ```
 
-Open a fresh Codex session in that project and invoke `$poteto-mode` with a question about how a function works. On Codex CLI 0.155.1, opt in to the execution checklist for a single invocation with `-c tools.update_plan.enabled=true`. When the tool is unavailable, the adapter uses a checklist in the conversation. The [review results](REVIEW-RESULTS.md) record where checklist behavior still varies.
+In a trial with Codex CLI `0.155.1`, Poteto Mode completed the Investigation checklist. It identified `checkout` as the direct caller and explained that `render_receipt` adds 175 cents when the cart has at least one item. [Caller](fixture/checkout.py#L4) · [Renderer](fixture/receipt.py#L1)
+
+To use the preview in your own project, copy the contents of `harness/pstack/codex/` into that project’s `.agents/` directory, then invoke `$poteto-mode` in a fresh Codex session. The bundle includes the upstream skills and their references. [Compatibility test results](REVIEW-RESULTS.md)
 
 ## Update upstream
 
