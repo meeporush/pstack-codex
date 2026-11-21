@@ -11,7 +11,7 @@ The skills-only prototype exercises the read-only Investigation playbook. Other 
 | `Task` | Use `spawn_agent` when the playbook calls for a delegate and the session exposes and permits it. Collect the result with `wait_agent` when available. |
 | `AskQuestion` | Use `request_user_input` when the current mode permits the call. Codex CLI 0.155.1 permits it in Plan Mode by default. In Default mode, ask in the conversation unless `features.default_mode_request_user_input` enables the tool. |
 | Open a todolist, or copy steps into the todolist tool | Use `update_plan`. If unavailable, post the checklist under a `Checklist` heading in the conversation and track progress there. End the final reply with that checklist. Use one numbered line per step and put each item's final status in parentheses. |
-| Run another pstack skill | Read `<pstack>/skills/<name>/SKILL.md` from this bundle. In the skills-only install the user invokes it with `$<name>`. |
+| Run another pstack skill | Read `<pstack>/skills/<name>/SKILL.md` from this bundle. The user invokes it with `$pstack:<name>` in a plugin install or `$<name>` in a project-local skills install. |
 | `Read` | Use `exec_command` with `sed -n` to read a range or `nl -ba` for source line numbers. |
 | `Grep` | Use `exec_command` with `rg -n`, scoped to the relevant files or directory. |
 | `Glob` | Use `exec_command` with `rg --files -g '<pattern>'` in the relevant directory. Include `--hidden` when searching a hidden directory such as `.agents/`. |

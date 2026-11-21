@@ -4,25 +4,19 @@ A community port of Lauren Tan’s pstack for Codex. The preview supports the **
 
 ## Quickstart
 
-With Git and a signed-in Codex CLI on macOS or Linux, paste this into your terminal. It copies the published skills and a two-file Python example into a temporary directory, then starts a read-only Codex run with the CLI’s default configuration.
+With a signed-in Codex CLI, paste this to add the P-Stack marketplace and install the plugin.
 
 ```bash
-(
-  set -e
-  pstack_trial="$(mktemp -d)"
-  git clone --depth 1 https://github.com/meeporush/pstack-codex.git "$pstack_trial/pstack-codex"
-  mkdir "$pstack_trial/demo"
-  cp -R "$pstack_trial/pstack-codex/harness/pstack/codex" "$pstack_trial/demo/.agents"
-  cp "$pstack_trial/pstack-codex/fixture/"*.py "$pstack_trial/demo/"
-  codex exec --ignore-user-config --cd "$pstack_trial/demo" \
-    --sandbox read-only --skip-git-repo-check --ephemeral \
-    '$poteto-mode Explain what render_receipt does and name its direct caller. Cite the source lines. Use only local files.'
-)
+codex plugin marketplace add meeporush/pstack-codex && codex plugin add pstack@pstack-codex
 ```
 
-In a trial with Codex CLI `0.155.1`, Poteto Mode completed the Investigation checklist. It identified `checkout` as the direct caller and explained that `render_receipt` adds 175 cents when the cart has at least one item. [Caller](fixture/checkout.py#L4) · [Renderer](fixture/receipt.py#L1)
+In a new Codex session in a project with source files, paste this to verify the installation.
 
-To use the preview in your own project, copy the contents of `harness/pstack/codex/` into that project’s `.agents/` directory, then invoke `$poteto-mode` in a fresh Codex session. The bundle includes the upstream skills and their references. [Compatibility test results](REVIEW-RESULTS.md)
+```text
+$pstack:poteto-mode Explain what one function in this project does. Cite its file and line number. Use only local files and keep it read-only.
+```
+
+You should see an Investigation checklist and a cited explanation of a function in your project. This flow was verified with Codex CLI `0.155.1`. [Compatibility test results](REVIEW-RESULTS.md)
 
 ## Update upstream
 
@@ -36,7 +30,7 @@ The updater fetches `main` from the repository in `UPSTREAM.json`, imports that 
 
 After those checks pass, the updater replaces `UPSTREAM.json`, `upstream/pstack/`, and `harness/pstack/codex/` together and leaves them ready for Git review. It requires those paths to be clean before replacing them. Set `--output` to keep the redacted receipts in a specific empty directory. The default creates a temporary directory and prints its path.
 
-Keep Codex-specific changes in `docs/harness/codex.md` and `scripts/generate-pstack-harness-trees.mjs`. The generator adds the adapter preamble and Codex invocation policy. Poteto Mode receives a distinct preamble because it owns playbook setup. Links to upstream files outside the generated package resolve at the pinned commit. For a local rebuild of the existing pin, run the generator directly. Its `--check` option compares the expected tree with the generated files and executable modes.
+Keep Codex-specific changes in `docs/harness/codex.md` and `scripts/generate-pstack-harness-trees.mjs`. The generator adds the adapter preamble and Codex invocation policy. Poteto Mode receives a distinct preamble because it owns playbook setup. Links to upstream files outside the generated package resolve at the pinned commit. For a local rebuild of the existing pin, run the generator directly. Its `--check` option compares the expected tree with the generated files and executable modes. Update the version in `docs/harness/codex-plugin.json` before generating a new plugin release.
 
 ## Verify Investigation
 

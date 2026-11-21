@@ -120,6 +120,7 @@ function render() {
   ];
   const files = new Map(copies.map((path) => [relative(PSTACK, path), file(path)]));
   files.set(ADAPTER, file(join(ROOT, ADAPTER)));
+  files.set(".codex-plugin/plugin.json", file(join(ROOT, "docs/harness/codex-plugin.json")));
   files.set("LICENSE", file(join(PSTACK, "LICENSE")));
   files.set("NOTICE", file(join(ROOT, "NOTICE")));
   const line =
