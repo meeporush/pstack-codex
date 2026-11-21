@@ -1,10 +1,12 @@
 {
   "name": "pstack",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Community port of Lauren Tan's pstack for Codex.",
   "skills": "./skills/",
   "interface": {
     "displayName": "pstack for Codex",
-    "shortDescription": "Investigate code with Poteto Mode"
+    "shortDescription": "Community port of pstack for Codex",
+    "longDescription": "The adapter translates pstack's Cursor instructions for Codex. It maps file reads and searches to Codex shell commands, checklists to update_plan or chat, and subagent and model settings to their Codex equivalents. It also tells Codex where to find the bundled skills and references.",
+    "websiteUrl": "https://github.com/meeporush/pstack-codex"
   }
 }
