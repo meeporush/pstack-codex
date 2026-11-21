@@ -1,6 +1,6 @@
 # pstack for Codex
 
-A community port of Lauren Tan’s pstack for Codex. The preview supports the **Investigation** playbook, which traces code and cites the relevant source lines.
+A community port of [pstack](https://github.com/cursor/plugins/tree/main/pstack) for Codex.
 
 ## Quickstart
 
@@ -18,19 +18,21 @@ $pstack:poteto-mode Explain what one function in this project does. Cite its fil
 
 You should see an Investigation checklist and a cited explanation of a function in your project. This flow was verified with Codex CLI `0.155.1`. [Compatibility test results](REVIEW-RESULTS.md)
 
-## Update upstream
+## How we keep the plugin up to date
 
-Run the updater from the port’s root on a branch for the upstream update. It uses Git, Node.js, Python 3.12 or newer, and a signed-in Codex CLI on macOS or Linux.
+We keep a copy of the exact version of pstack we tested. To bring in changes from the original project, we download the latest pstack files, rebuild the Codex plugin, and test its skills in fresh Codex sessions. The tests check that Codex opens the Investigation checklist, finds the bundled helpers, and cites source lines while leaving the example files alone.
+
+### Update the plugin as a maintainer
+
+On macOS or Linux, run this from the root of this repo on a new branch. The updater uses Git, Node.js, Python 3.12 or newer, and a Codex CLI signed in with a local `auth.json` file.
 
 ```bash
 python3 scripts/update_upstream.py
 ```
 
-The updater fetches `main` from the repository in `UPSTREAM.json`, imports that commit’s `pstack/` snapshot, and reads the release version from the plugin manifest. It builds the Codex package in a temporary directory and runs the generator’s coverage, link, and drift checks. It then runs three live checks each for stock Investigation, native checklist routing, bundled `why` routing, and explicit invocation. Every run must finish with the fixture unchanged. Each case must meet its behavioral checks in at least two runs. The receipts also record checklist wording and fallback completion.
+The script pulls the latest `main` from the original pstack repo and tests the bundled skills in a temporary directory. Each live check runs three times. All runs must finish without changing the example files, and at least two runs per check must show the expected behavior. If the checks pass, the script records the exact version and Git commit in `UPSTREAM.json` and replaces the saved copy and built plugin for review. Start with no pending edits to those files. The script prints where it saved the test summaries. Use `--output` to choose an empty directory.
 
-After those checks pass, the updater replaces `UPSTREAM.json`, `upstream/pstack/`, and `harness/pstack/codex/` together and leaves them ready for Git review. It requires those paths to be clean before replacing them. Set `--output` to keep the redacted receipts in a specific empty directory. The default creates a temporary directory and prints its path.
-
-Keep Codex-specific changes in `docs/harness/codex.md` and `scripts/generate-pstack-harness-trees.mjs`. The generator adds the adapter preamble and Codex invocation policy. Poteto Mode receives a distinct preamble because it owns playbook setup. Links to upstream files outside the generated package resolve at the pinned commit. For a local rebuild of the existing pin, run the generator directly. Its `--check` option compares the expected tree with the generated files and executable modes. Update the version in `docs/harness/codex-plugin.json` before generating a new plugin release.
+For a new plugin release, update the version in `docs/harness/codex-plugin.json` and rebuild with `node scripts/generate-pstack-harness-trees.mjs`. Run it again with `--check` to confirm that the packaged files match the saved source and Codex adapter.
 
 ## Verify Investigation
 
@@ -42,4 +44,4 @@ python3 scripts/run_review.py --jobs 4
 
 Use `--case` to select cases and `--runs` to control repeats. The default is three runs per case plus one clean-environment discovery run. For one separately captured `codex exec --json` log, use `python3 scripts/check_verification.py --help`. The verifier records playbook selection, checklist order and wording, final statuses, citations, and fixture integrity. `python3 scripts/probe_tool_schema.py verification/tool-schema.json` checks CLI tool definitions against a loopback test endpoint using a dummy key.
 
-See [the pinned source](UPSTREAM.json) and [attribution](NOTICE). The upstream material is distributed under [MIT](LICENSE).
+See [the exact version we use](UPSTREAM.json) and [attribution](NOTICE). The original pstack files are distributed under [MIT](LICENSE).
