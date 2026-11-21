@@ -14,7 +14,7 @@ const GUIDE = "docs/guide";
 const COMMAND = "node scripts/generate-pstack-harness-trees.mjs";
 const { repository, commit } = JSON.parse(readFileSync(join(ROOT, "UPSTREAM.json"), "utf8"));
 const LINK = /\]\(([^)\s]+)\)/g;
-const SIDECAR = "policy:\n  allow_implicit_invocation: false\n";
+const EXPLICIT_INVOCATION_POLICY = "\npolicy:\n  allow_implicit_invocation: false\n";
 // Checklist ordering is specific to the workflow router. The review matrix
 // compares this override with the shared preamble before enabling it.
 const PREAMBLE_OVERRIDES = {
@@ -119,8 +119,10 @@ function render() {
     join(PSTACK, "README.md"),
   ];
   const files = new Map(copies.map((path) => [relative(PSTACK, path), file(path)]));
+  const manifest = file(join(ROOT, "docs/harness/codex-plugin.json"));
+  const { name: pluginName } = JSON.parse(manifest.bytes.toString("utf8"));
   files.set(ADAPTER, file(join(ROOT, ADAPTER)));
-  files.set(".codex-plugin/plugin.json", file(join(ROOT, "docs/harness/codex-plugin.json")));
+  files.set(".codex-plugin/plugin.json", manifest);
   files.set("LICENSE", file(join(PSTACK, "LICENSE")));
   files.set("NOTICE", file(join(ROOT, "NOTICE")));
   const line =
@@ -133,11 +135,14 @@ function render() {
       const preamble = PREAMBLE_OVERRIDES[skill] ?? line;
       files.get(path).bytes = Buffer.from(text.replace(/^(# .*)\n+/m, `$1\n\n${preamble}\n\n`));
     }
+    const metadata = `skills/${skill}/agents/openai.yaml`;
+    if (files.has(metadata)) throw new Error(`Review upstream Codex metadata at ${metadata}`);
+    const displayName = `${pluginName}:${skill}`;
+    let metadataText = `interface:\n  display_name: ${JSON.stringify(displayName)}\n`;
     if (/^disable-model-invocation:\s*true\s*$/m.test(frontmatter)) {
-      const metadata = `skills/${skill}/agents/openai.yaml`;
-      if (files.has(metadata)) throw new Error(`Review upstream Codex metadata at ${metadata}`);
-      files.set(metadata, { bytes: Buffer.from(SIDECAR), executable: false });
+      metadataText += EXPLICIT_INVOCATION_POLICY;
     }
+    files.set(metadata, { bytes: Buffer.from(metadataText), executable: false });
   }
   for (const [path, entry] of files) {
     if (!path.endsWith(".md")) continue;

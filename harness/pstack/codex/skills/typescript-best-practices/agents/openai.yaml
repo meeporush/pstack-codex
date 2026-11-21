@@ -1,2 +1,5 @@
+interface:
+  display_name: "pstack:typescript-best-practices"
+
 policy:
   allow_implicit_invocation: false
