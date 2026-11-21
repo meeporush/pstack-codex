@@ -4,7 +4,7 @@ A community port of Lauren Tan’s pstack for Codex. The preview supports the **
 
 ## Quickstart
 
-With a signed-in Codex CLI, paste this to add the P-Stack marketplace and install the plugin.
+With a signed-in Codex CLI, paste this to add the pstack marketplace and install the plugin.
 
 ```bash
 codex plugin marketplace add meeporush/pstack-codex && codex plugin add pstack@pstack-codex

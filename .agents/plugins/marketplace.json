@@ -1,7 +1,7 @@
 {
   "name": "pstack-codex",
   "interface": {
-    "displayName": "P-Stack for Codex"
+    "displayName": "pstack for Codex"
   },
   "plugins": [
     {
