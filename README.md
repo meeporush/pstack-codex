@@ -1,6 +1,6 @@
 # pstack for Codex
 
-A downstream port of Lauren Tan’s pstack for project-local Codex skills. The preview supports the **Investigation** playbook. The generated package includes all 58 upstream skills and their bundled references so the shared entry point can resolve them. Other playbooks are available for inspection and still need compatibility testing.
+A downstream port of Lauren Tan’s pstack for project-local Codex skills. The preview supports the **Investigation** playbook. The generated package includes every upstream skill and its bundled references so the shared entry point can resolve them. Other playbooks are available for inspection and still need compatibility testing.
 
 ## Try the preview
 
@@ -16,14 +16,17 @@ Open a fresh Codex session in that project and invoke `$poteto-mode` with a ques
 
 ## Update upstream
 
-`UPSTREAM.json` records the pstack version and exact Cursor repository commit. Update it with the matching `pstack/` snapshot under `upstream/`. Keep host-specific changes in `docs/harness/codex.md` and `scripts/generate-pstack-harness-trees.mjs`. The generator adds the adapter preamble and sets the Codex invocation policy for explicitly invoked upstream skills. Links to upstream files omitted from the package resolve at the pinned commit.
+Run the updater from the port’s root on a branch for the upstream update. It uses Git, Node.js, Python 3.12 or newer, and a signed-in Codex CLI on macOS or Linux.
 
 ```bash
-node scripts/generate-pstack-harness-trees.mjs
-node scripts/generate-pstack-harness-trees.mjs --check
+python3 scripts/update_upstream.py
 ```
 
-The generator checks Cursor term coverage and internal links before writing the package. The `--check` mode also compares the expected tree with the generated files and executable modes. Keep the generated tree and the upstream pin in the same version control update. Poteto Mode receives a distinct preamble because it owns playbook setup. The other wrapped skills receive the shared adapter link.
+The updater fetches `main` from the repository in `UPSTREAM.json`, imports that commit’s `pstack/` snapshot, and reads the release version from the plugin manifest. It builds the Codex package in a temporary directory and runs the generator’s coverage, link, and drift checks. It then runs three live checks each for stock Investigation, native checklist routing, bundled `why` routing, and explicit invocation. Every run must finish with the fixture unchanged. Each case must meet its behavioral checks in at least two runs. The receipts also record checklist wording and fallback completion.
+
+After those checks pass, the updater replaces `UPSTREAM.json`, `upstream/pstack/`, and `harness/pstack/codex/` together and leaves them ready for Git review. It requires those paths to be clean before replacing them. Set `--output` to keep the redacted receipts in a specific empty directory. The default creates a temporary directory and prints its path.
+
+Keep Codex-specific changes in `docs/harness/codex.md` and `scripts/generate-pstack-harness-trees.mjs`. The generator adds the adapter preamble and Codex invocation policy. Poteto Mode receives a distinct preamble because it owns playbook setup. Links to upstream files outside the generated package resolve at the pinned commit. For a local rebuild of the existing pin, run the generator directly. Its `--check` option compares the expected tree with the generated files and executable modes.
 
 ## Verify Investigation
 
