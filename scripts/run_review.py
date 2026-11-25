@@ -217,6 +217,10 @@ def run_case(case, index, output, skill_flags):
         env["CODEX_HOME"] = str(codex_home)
         setup_fixture(work, case)
         prompt, checklist = CASES[case]
+        if prompt.startswith("$poteto-mode "):
+            # Include the path so Codex loads the explicit skill before inspecting the fixture.
+            skill_path = work / ".agents/skills/poteto-mode/SKILL.md"
+            prompt = prompt.replace("$poteto-mode", f"[$poteto-mode]({skill_path})", 1)
         flags = list(skill_flags)
         if checklist is not None:
             flags += ["-c", f"tools.update_plan.enabled={str(checklist).lower()}"]
